@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360">
+  <title>アブストラクト用の骨格品質判定図</title>
+  <desc>合成実写入力，推定骨格，品質特徴量および採否判定を一段で示す論文用の横長図</desc>
+  <defs>
+    <clipPath id="inputClip"><rect x="18" y="44" width="404" height="242" rx="3"/></clipPath>
+    <clipPath id="acceptClip"><rect x="856" y="88" width="142" height="156" rx="3"/></clipPath>
+    <clipPath id="rejectClip"><rect x="1032" y="88" width="142" height="156" rx="3"/></clipPath>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M0,0 L11,5.5 L0,11 z" fill="#4A535B"/>
+    </marker>
+    <style>
+      .t{font-family:'Hiragino Sans','Yu Gothic','Noto Sans CJK JP',sans-serif;fill:#20252A}
+      .head{font-size:25px;font-weight:700}
+      .body{font-size:21px}
+      .small{font-size:17px}
+      .tiny{font-size:14px}
+      .math{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:italic}
+      .mathbold{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:italic;font-weight:700}
+      .mathroman{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:normal}
+      .boneHalo{fill:none;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;opacity:.90}
+      .bone{fill:none;stroke:#00A6D6;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+      .joint{fill:#FFFFFF;stroke:#0072B2;stroke-width:4}
+    </style>
+  </defs>
+  <rect width="1200" height="360" fill="#FFFFFF"/>
+
+  <text class="t head" x="18" y="30">（a）入力と推定骨格</text>
+  <g clip-path="url(#inputClip)">
+    <image href="synthetic-pose-input.png" x="18" y="44" width="404" height="242" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="18" y="44" width="404" height="242" fill="#0B2738" opacity="0.04"/>
+  </g>
+  <rect x="18" y="44" width="404" height="242" fill="none" stroke="#707A82" stroke-width="2"/>
+  <g>
+    <path class="boneHalo" d="M219 114 L219 178 M198 122 L219 130 L244 124 M198 122 L188 151 L180 179 M244 124 L250 160 L236 189 M219 178 L178 203 L168 255 M219 178 L246 231 L275 244"/>
+    <path class="bone" d="M219 114 L219 178 M198 122 L219 130 L244 124 M198 122 L188 151 L180 179 M244 124 L250 160 L236 189 M219 178 L178 203 L168 255 M219 178 L246 231 L275 244"/>
+    <circle class="joint" cx="219" cy="114" r="6"/><circle class="joint" cx="198" cy="122" r="6"/>
+    <circle class="joint" cx="219" cy="130" r="6"/><circle class="joint" cx="244" cy="124" r="6"/>
+    <circle class="joint" cx="188" cy="151" r="6"/><circle class="joint" cx="180" cy="179" r="6"/>
+    <circle class="joint" cx="250" cy="160" r="6"/><circle class="joint" cx="236" cy="189" r="6"/>
+    <circle class="joint" cx="219" cy="178" r="6"/><circle class="joint" cx="178" cy="203" r="6"/>
+    <circle class="joint" cx="168" cy="255" r="6"/><circle class="joint" cx="246" cy="231" r="6"/>
+    <circle class="joint" cx="275" cy="244" r="6"/>
+    <circle cx="236" cy="189" r="9" fill="#FFFFFF" stroke="#D55E00" stroke-width="5"/>
+  </g>
+  <text class="t tiny" x="18" y="310">合成実写入力／関節座標 <tspan class="mathbold">p̂<tspan baseline-shift="sub" font-size="11">j</tspan></tspan>・信頼度 <tspan class="math">c<tspan baseline-shift="sub" font-size="11">j</tspan></tspan></text>
+
+  <line x1="438" y1="171" x2="478" y2="171" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="t head" x="486" y="30">（b）品質スコア</text>
+  <rect x="492" y="58" width="298" height="210" rx="3" fill="#F7F8F9" stroke="#C8CED2" stroke-width="2"/>
+  <text class="t small" x="512" y="88">平均関節信頼度</text>
+  <line x1="512" y1="116" x2="754" y2="116" stroke="#D8DDE1" stroke-width="10"/>
+  <line x1="512" y1="116" x2="704" y2="116" stroke="#0072B2" stroke-width="10"/>
+  <circle cx="704" cy="116" r="9" fill="#0072B2"/>
+  <text class="t small" x="512" y="154">骨格辺長の残差</text>
+  <line x1="512" y1="182" x2="754" y2="182" stroke="#D8DDE1" stroke-width="10"/>
+  <line x1="512" y1="182" x2="646" y2="182" stroke="#D55E00" stroke-width="10"/>
+  <circle cx="646" cy="182" r="9" fill="#D55E00"/>
+  <text class="math body" x="641" y="235" text-anchor="middle">q = αc̄ − (1 − α)d<tspan class="mathroman" baseline-shift="sub" font-size="15">bone</tspan></text>
+  <text class="t tiny" x="641" y="292" text-anchor="middle"><tspan class="math">α</tspan>，<tspan class="math">τ</tspan>は検証系列だけで固定</text>
+
+  <line x1="802" y1="171" x2="838" y2="171" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="t head" x="846" y="30">（c）採用／除外</text>
+  <g clip-path="url(#acceptClip)">
+    <image href="synthetic-pose-input.png" x="826" y="88" width="222" height="156" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <rect x="856" y="88" width="142" height="156" fill="none" stroke="#009E73" stroke-width="6"/>
+  <rect x="874" y="101" width="106" height="34" fill="#FFFFFF" opacity="0.90"/>
+  <text class="math small" x="927" y="125" text-anchor="middle">q = 0.81</text>
+  <text class="t body" x="927" y="274" text-anchor="middle" fill="#007A59">採用</text>
+
+  <g clip-path="url(#rejectClip)">
+    <image href="synthetic-pose-input.png" x="1002" y="88" width="222" height="156" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="1032" y="88" width="142" height="156" fill="#7A2600" opacity="0.16"/>
+  </g>
+  <rect x="1032" y="88" width="142" height="156" fill="none" stroke="#D55E00" stroke-width="6"/>
+  <rect x="1050" y="101" width="106" height="34" fill="#FFFFFF" opacity="0.90"/>
+  <text class="math small" x="1103" y="125" text-anchor="middle">q = 0.27</text>
+  <text class="t body" x="1103" y="274" text-anchor="middle" fill="#A83F00">除外</text>
+  <text class="t tiny" x="1015" y="310" text-anchor="middle">PCKと採用率を併記</text>
+
+  <line x1="18" y1="330" x2="1178" y2="330" stroke="#D2D7DA" stroke-width="2"/>
+  <text class="t tiny" x="18" y="351">注：画像，推定結果および数値は組版説明用の合成例である．</text>
+  <text class="t tiny" x="1178" y="351" text-anchor="end">［架空の記入例・提出不可］</text>
+</svg>

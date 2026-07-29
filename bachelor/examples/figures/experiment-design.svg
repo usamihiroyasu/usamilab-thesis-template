@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="660" viewBox="0 0 1500 660">
+  <title>系列単位のデータ分割と評価プロトコル</title>
+  <desc>合成実写フレームを用いて系列単位の分割，検証系列での閾値選択，独立評価系列での条件別評価を示す論文図</desc>
+  <defs>
+    <clipPath id="sequence"><rect x="35" y="105" width="484" height="208" rx="2"/></clipPath>
+    <clipPath id="normal"><rect x="1005" y="108" width="142" height="170" rx="2"/></clipPath>
+    <clipPath id="dark"><rect x="1162" y="108" width="142" height="170" rx="2"/></clipPath>
+    <clipPath id="blur"><rect x="1319" y="108" width="142" height="170" rx="2"/></clipPath>
+    <filter id="lowLight" x="-10%" y="-10%" width="120%" height="120%">
+      <feColorMatrix type="matrix" values="0.38 0 0 0 0.015  0 0.42 0 0 0.025  0 0 0.50 0 0.045  0 0 0 1 0"/>
+    </filter>
+    <filter id="motionBlur" x="-20%" y="-10%" width="140%" height="120%">
+      <feGaussianBlur stdDeviation="8 1.2"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#4A535B"/>
+    </marker>
+    <style>
+      .t{font-family:'Hiragino Sans','Yu Gothic','Noto Sans CJK JP',sans-serif;fill:#20252A}
+      .head{font-size:30px;font-weight:700}
+      .body{font-size:24px}
+      .small{font-size:21px}
+      .tiny{font-size:18px}
+      .math{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:italic}
+      .axis{stroke:#4A535B;stroke-width:2}
+      .grid{stroke:#D8DDE1;stroke-width:1.5;stroke-dasharray:5 5}
+    </style>
+  </defs>
+  <rect width="1500" height="660" fill="#FFFFFF"/>
+
+  <!-- (a) Sequence-level split with real-looking frame thumbnails -->
+  <text class="t head" x="28" y="45">（a）系列単位のデータ分割</text>
+  <text class="t tiny" x="28" y="76" fill="#59636B">隣接フレームを異なる集合へ混入させない</text>
+  <g>
+    <g clip-path="url(#sequence)">
+      <image href="synthetic-pose-sequence.png" x="35" y="105" width="484" height="208" preserveAspectRatio="xMidYMid slice"/>
+    </g>
+    <rect x="35" y="105" width="484" height="208" fill="none" stroke="#79838A" stroke-width="2"/>
+    <line x1="156" y1="105" x2="156" y2="313" stroke="#FFFFFF" stroke-width="3"/>
+    <line x1="277" y1="105" x2="277" y2="313" stroke="#FFFFFF" stroke-width="3"/>
+    <line x1="398" y1="105" x2="398" y2="313" stroke="#FFFFFF" stroke-width="3"/>
+    <text class="math tiny" x="95" y="340" text-anchor="middle">t<tspan baseline-shift="sub" font-size="12">0</tspan></text>
+    <text class="math tiny" x="216" y="340" text-anchor="middle">t<tspan baseline-shift="sub" font-size="12">1</tspan></text>
+    <text class="math tiny" x="337" y="340" text-anchor="middle">t<tspan baseline-shift="sub" font-size="12">2</tspan></text>
+    <text class="math tiny" x="458" y="340" text-anchor="middle">t<tspan baseline-shift="sub" font-size="12">3</tspan></text>
+  </g>
+
+  <text class="t body" x="35" y="390" fill="#0072B2">学習</text>
+  <line x1="120" y1="382" x2="500" y2="382" stroke="#0072B2" stroke-width="13"/>
+  <g fill="#0072B2"><circle cx="145" cy="382" r="12"/><circle cx="245" cy="382" r="12"/><circle cx="345" cy="382" r="12"/><circle cx="445" cy="382" r="12"/></g>
+  <text class="t tiny" x="120" y="418">S01–S04：基準辺長とモデル学習</text>
+
+  <text class="t body" x="35" y="470" fill="#9B6400">検証</text>
+  <line x1="120" y1="462" x2="500" y2="462" stroke="#E69F00" stroke-width="13"/>
+  <g fill="#E69F00"><circle cx="145" cy="462" r="12"/><circle cx="245" cy="462" r="12"/><circle cx="345" cy="462" r="12"/><circle cx="445" cy="462" r="12"/></g>
+  <text class="t tiny" x="120" y="498">S05–S08：<tspan class="math">α</tspan>，<tspan class="math">τ</tspan>を選択</text>
+
+  <text class="t body" x="35" y="550" fill="#007A5B">評価</text>
+  <line x1="120" y1="542" x2="500" y2="542" stroke="#009E73" stroke-width="13"/>
+  <g fill="#009E73"><circle cx="145" cy="542" r="12"/><circle cx="245" cy="542" r="12"/><circle cx="345" cy="542" r="12"/><circle cx="445" cy="542" r="12"/></g>
+  <text class="t tiny" x="120" y="578">S09–S12：固定条件で最終評価</text>
+
+  <text class="t tiny" x="267" y="610" text-anchor="middle" fill="#A83F00">分割単位はフレームではなく撮影系列</text>
+
+  <line x1="545" y1="308" x2="578" y2="308" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- (b) Validation selection as a reproducible operating point -->
+  <text class="t head" x="600" y="45">（b）検証系列で動作点選択</text>
+  <text class="t tiny" x="600" y="76" fill="#59636B">PCKと採用率のトレードオフを固定</text>
+  <line class="axis" x1="650" y1="397" x2="940" y2="397"/>
+  <line class="axis" x1="650" y1="118" x2="650" y2="397"/>
+  <line class="grid" x1="650" y1="185" x2="940" y2="185"/>
+  <line class="grid" x1="650" y1="255" x2="940" y2="255"/>
+  <line class="grid" x1="650" y1="325" x2="940" y2="325"/>
+  <text class="t tiny" x="634" y="127" text-anchor="end">0.90</text>
+  <text class="t tiny" x="634" y="402" text-anchor="end">0.70</text>
+  <text class="t tiny" x="795" y="434" text-anchor="middle">採用率</text>
+  <text class="t tiny" x="608" y="258" text-anchor="middle" transform="rotate(-90 608 258)">PCK@0.2</text>
+
+  <path d="M680 350 C720 315,750 285,786 254 C820 224,855 196,911 164"
+        fill="none" stroke="#0072B2" stroke-width="6"/>
+  <g fill="#FFFFFF" stroke="#0072B2" stroke-width="4">
+    <circle cx="680" cy="350" r="8"/><circle cx="733" cy="302" r="8"/><circle cx="786" cy="254" r="8"/>
+    <circle cx="839" cy="211" r="8"/><circle cx="911" cy="164" r="8"/>
+  </g>
+  <circle cx="839" cy="211" r="13" fill="#E69F00" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="839" y1="211" x2="902" y2="265" stroke="#E69F00" stroke-width="3"/>
+  <rect x="776" y="268" width="173" height="70" fill="#FFF9EA" stroke="#E69F00"/>
+  <text class="t small" x="862" y="297" text-anchor="middle">選択点（<tspan class="math">α<tspan baseline-shift="super" font-size="14">∗</tspan></tspan>，<tspan class="math">τ<tspan baseline-shift="super" font-size="14">∗</tspan></tspan>）</text>
+  <text class="t tiny" x="862" y="326" text-anchor="middle">以後は固定</text>
+  <text class="t tiny" x="663" y="466">● 各点：検証系列だけで算出</text>
+  <text class="t tiny" x="663" y="498">線：採用率を変えたときの動作曲線</text>
+  <rect x="663" y="520" width="278" height="54" fill="#F7F8F9" stroke="#D2D7DA"/>
+  <text class="t tiny" x="802" y="553" text-anchor="middle">評価系列で再調整しない</text>
+
+  <line x1="970" y1="308" x2="1003" y2="308" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- (c) Independent-condition evaluation with photographic examples -->
+  <text class="t head" x="1020" y="45">（c）独立系列で条件別評価</text>
+  <text class="t tiny" x="1020" y="76" fill="#59636B">点推定と95%信頼区間を報告</text>
+  <g clip-path="url(#normal)">
+    <image href="synthetic-pose-input.png" x="941" y="108" width="270" height="170" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <g clip-path="url(#dark)" filter="url(#lowLight)">
+    <image href="synthetic-pose-input.png" x="1098" y="108" width="270" height="170" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <g clip-path="url(#blur)" filter="url(#motionBlur)">
+    <image href="synthetic-pose-input.png" x="1255" y="108" width="270" height="170" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <rect x="1005" y="108" width="142" height="170" fill="none" stroke="#8B959C"/>
+  <rect x="1162" y="108" width="142" height="170" fill="none" stroke="#8B959C"/>
+  <rect x="1319" y="108" width="142" height="170" fill="none" stroke="#8B959C"/>
+  <text class="t small" x="1076" y="310" text-anchor="middle">通常照明</text>
+  <text class="t small" x="1233" y="310" text-anchor="middle">低照度</text>
+  <text class="t small" x="1390" y="310" text-anchor="middle">動きぼけ</text>
+
+  <text class="t small" x="1005" y="367">条件別PCK@0.2</text>
+  <line class="axis" x1="1120" y1="407" x2="1452" y2="407"/>
+  <line class="grid" x1="1186" y1="394" x2="1186" y2="550"/>
+  <line class="grid" x1="1319" y1="394" x2="1319" y2="550"/>
+  <line class="grid" x1="1452" y1="394" x2="1452" y2="550"/>
+  <text class="t tiny" x="1186" y="582" text-anchor="middle">0.70</text>
+  <text class="t tiny" x="1319" y="582" text-anchor="middle">0.80</text>
+  <text class="t tiny" x="1452" y="582" text-anchor="middle">0.90</text>
+  <text class="t tiny" x="1005" y="440">通常</text>
+  <text class="t tiny" x="1005" y="490">低照度</text>
+  <text class="t tiny" x="1005" y="540">ぼけ</text>
+  <g stroke="#0072B2" stroke-width="6" stroke-linecap="round">
+    <line x1="1362" y1="433" x2="1417" y2="433"/><line x1="1245" y1="483" x2="1311" y2="483"/><line x1="1198" y1="533" x2="1272" y2="533"/>
+  </g>
+  <g fill="#0072B2" stroke="#FFFFFF" stroke-width="3">
+    <circle cx="1390" cy="433" r="10"/><circle cx="1278" cy="483" r="10"/><circle cx="1235" cy="533" r="10"/>
+  </g>
+  <text class="t tiny" x="1005" y="610" fill="#59636B">点：平均，線：95%信頼区間</text>
+
+  <line x1="28" y1="626" x2="1462" y2="626" stroke="#D5DADD" stroke-width="1.5"/>
+  <text class="t tiny" x="28" y="653" fill="#687078">注：画像，系列ID，評価値は組版説明用の合成例である．</text>
+  <text class="t tiny" x="1462" y="653" text-anchor="end" fill="#687078">［架空の記入例・提出不可］</text>
+</svg>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="650" viewBox="0 0 1500 650">
+  <title>骨格品質スコアによる誤推定除外</title>
+  <desc>合成実写入力に姿勢推定結果を重ね，信頼度と骨格形状特徴から品質スコアを計算して採否を判定する論文図</desc>
+  <defs>
+    <clipPath id="photoClip"><rect x="28" y="78" width="486" height="304" rx="2"/></clipPath>
+    <clipPath id="thumbClip"><rect x="1132" y="350" width="150" height="148" rx="2"/></clipPath>
+    <clipPath id="rejectClip"><rect x="1302" y="350" width="150" height="148" rx="2"/></clipPath>
+    <radialGradient id="uncertainJoint">
+      <stop offset="0" stop-color="#D55E00" stop-opacity="0.72"/>
+      <stop offset="0.45" stop-color="#E69F00" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#E69F00" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#4A535B"/>
+    </marker>
+    <style>
+      .t{font-family:'Hiragino Sans','Yu Gothic','Noto Sans CJK JP',sans-serif;fill:#20252A}
+      .head{font-size:30px;font-weight:700}
+      .body{font-size:24px}
+      .small{font-size:21px}
+      .tiny{font-size:18px}
+      .math{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:italic}
+      .mathbold{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:italic;font-weight:700}
+      .mathroman{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:normal}
+      .hair{stroke:#BAC1C6;stroke-width:2}
+      .axis{stroke:#4A535B;stroke-width:2}
+      .grid{stroke:#D8DDE1;stroke-width:1.5;stroke-dasharray:5 5}
+      .halo{stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;opacity:0.92}
+      .bone{stroke:#00A6D6;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+      .joint{fill:#FFFFFF;stroke:#0072B2;stroke-width:4}
+    </style>
+  </defs>
+  <rect width="1500" height="650" fill="#FFFFFF"/>
+
+  <!-- (a) Photorealistic input and pose overlay -->
+  <text class="t head" x="28" y="45">（a）入力画像と推定骨格</text>
+  <g clip-path="url(#photoClip)">
+    <image href="synthetic-pose-input.png" x="28" y="78" width="486" height="304" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="28" y="78" width="486" height="304" fill="#0B2738" opacity="0.05"/>
+  </g>
+  <rect x="28" y="78" width="486" height="304" fill="none" stroke="#707A82" stroke-width="2"/>
+
+  <!-- white halo keeps annotations legible on a photographic background -->
+  <g fill="none">
+    <path class="halo" d="M269 166 L269 245 M244 176 L269 186 L299 178 M244 176 L232 212 L222 247 M299 178 L306 222 L289 257 M269 245 L219 275 L207 342 M269 245 L302 309 L337 326"/>
+    <path class="bone" d="M269 166 L269 245 M244 176 L269 186 L299 178 M244 176 L232 212 L222 247 M299 178 L306 222 L289 257 M269 245 L219 275 L207 342 M269 245 L302 309 L337 326"/>
+  </g>
+  <g>
+    <circle class="joint" cx="269" cy="166" r="7"/><circle class="joint" cx="244" cy="176" r="7"/>
+    <circle class="joint" cx="269" cy="186" r="7"/><circle class="joint" cx="299" cy="178" r="7"/>
+    <circle class="joint" cx="232" cy="212" r="7"/><circle class="joint" cx="222" cy="247" r="7"/>
+    <circle class="joint" cx="306" cy="222" r="7"/><circle class="joint" cx="289" cy="257" r="7"/>
+    <circle class="joint" cx="269" cy="245" r="7"/><circle class="joint" cx="219" cy="275" r="7"/>
+    <circle class="joint" cx="207" cy="342" r="7"/><circle class="joint" cx="302" cy="309" r="7"/>
+    <circle class="joint" cx="337" cy="326" r="7"/>
+  </g>
+  <circle cx="289" cy="257" r="50" fill="url(#uncertainJoint)"/>
+  <line x1="289" y1="257" x2="331" y2="238" stroke="#D55E00" stroke-width="4" stroke-dasharray="7 5"/>
+  <circle cx="331" cy="238" r="8" fill="#FFFFFF" stroke="#D55E00" stroke-width="4"/>
+  <rect x="333" y="204" width="154" height="39" rx="19" fill="#FFFFFF" opacity="0.92"/>
+  <text class="t tiny" x="346" y="231" fill="#A83F00">低信頼関節</text>
+  <text class="t small" x="28" y="421">出力：関節座標 <tspan class="mathbold">p̂<tspan baseline-shift="sub" font-size="15">j</tspan></tspan>，信頼度 <tspan class="math">c<tspan baseline-shift="sub" font-size="15">j</tspan></tspan></text>
+  <text class="t tiny" x="28" y="451" fill="#59636B">合成入力画像／人物・計測値はすべて説明用</text>
+
+  <line x1="535" y1="259" x2="568" y2="259" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- (b) Research-style feature diagnostics -->
+  <text class="t head" x="590" y="45">（b）品質特徴量</text>
+  <text class="t small" x="590" y="84">関節信頼度</text>
+  <line class="axis" x1="626" y1="214" x2="965" y2="214"/>
+  <line class="axis" x1="626" y1="104" x2="626" y2="214"/>
+  <line class="grid" x1="626" y1="139" x2="965" y2="139"/>
+  <line class="grid" x1="626" y1="176" x2="965" y2="176"/>
+  <polyline points="640,122 672,128 704,126 736,137 768,131 800,142 832,135 864,151 896,147 928,198 952,154"
+            fill="none" stroke="#0072B2" stroke-width="5"/>
+  <circle cx="928" cy="198" r="8" fill="#D55E00"/>
+  <text class="t tiny" x="928" y="236" text-anchor="middle" fill="#A83F00">右手</text>
+  <text class="t tiny" x="616" y="116" text-anchor="end">1.0</text>
+  <text class="t tiny" x="616" y="211" text-anchor="end">0.0</text>
+
+  <text class="t small" x="590" y="286">正規化骨格辺長の残差</text>
+  <line class="axis" x1="626" y1="425" x2="965" y2="425"/>
+  <line class="axis" x1="626" y1="315" x2="626" y2="425"/>
+  <rect x="655" y="365" width="34" height="60" fill="#8EC6DF"/>
+  <rect x="714" y="350" width="34" height="75" fill="#68ADD0"/>
+  <rect x="773" y="337" width="34" height="88" fill="#3E93BE"/>
+  <rect x="832" y="326" width="34" height="99" fill="#0072B2"/>
+  <rect x="891" y="303" width="34" height="122" fill="#D55E00"/>
+  <line x1="626" y1="336" x2="965" y2="336" stroke="#E69F00" stroke-width="3" stroke-dasharray="8 5"/>
+  <text class="t tiny" x="970" y="343" fill="#9B6400">基準範囲</text>
+  <text class="t tiny" x="807" y="455" text-anchor="middle">骨格辺 <tspan class="math">e ∈ ℰ</tspan></text>
+
+  <rect x="615" y="488" width="332" height="86" fill="#F5F7F8" stroke="#D0D5D9" stroke-width="1.5"/>
+  <text class="math body" x="781" y="522" text-anchor="middle">q = αc̄ − (1 − α)d<tspan class="mathroman" baseline-shift="sub" font-size="17">bone</tspan></text>
+  <text class="t tiny" x="781" y="554" text-anchor="middle"><tspan class="math">α</tspan>，<tspan class="math">τ</tspan>は検証系列だけで選択</text>
+
+  <line x1="995" y1="259" x2="1028" y2="259" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- (c) Score distribution and selected observations -->
+  <text class="t head" x="1050" y="45">（c）品質スコアによる選別</text>
+  <text class="t small" x="1050" y="84">検証系列のスコア分布</text>
+  <line class="axis" x1="1080" y1="285" x2="1450" y2="285"/>
+  <line class="axis" x1="1080" y1="118" x2="1080" y2="285"/>
+  <path d="M1085 284 C1130 282,1148 253,1172 210 C1195 166,1221 144,1250 163 C1280 184,1293 247,1335 274"
+        fill="#D55E00" fill-opacity="0.13" stroke="#D55E00" stroke-width="5"/>
+  <path d="M1190 282 C1240 278,1270 260,1301 222 C1330 187,1365 151,1401 165 C1425 175,1440 222,1452 278"
+        fill="#009E73" fill-opacity="0.13" stroke="#009E73" stroke-width="5"/>
+  <line x1="1284" y1="111" x2="1284" y2="307" stroke="#333B41" stroke-width="3" stroke-dasharray="8 5"/>
+  <text class="math body" x="1284" y="336" text-anchor="middle">τ</text>
+  <text class="t tiny" x="1178" y="191" text-anchor="middle" fill="#A83F00">除外候補</text>
+  <text class="t tiny" x="1388" y="191" text-anchor="middle" fill="#007A5B">採用候補</text>
+  <text class="math tiny" x="1450" y="312" text-anchor="end">q</text>
+
+  <g clip-path="url(#thumbClip)">
+    <image href="synthetic-pose-input.png" x="1128" y="350" width="236" height="148" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <rect x="1132" y="350" width="150" height="148" fill="none" stroke="#009E73" stroke-width="4"/>
+  <rect x="1195" y="362" width="75" height="33" fill="#FFFFFF" opacity="0.92"/>
+  <text class="math tiny" x="1232" y="385" text-anchor="middle" fill="#007A5B">q = 0.81</text>
+  <text class="t small" x="1207" y="531" text-anchor="middle" fill="#007A5B">採用</text>
+
+  <g clip-path="url(#rejectClip)">
+    <image href="synthetic-pose-input.png" x="1298" y="350" width="236" height="148" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="1302" y="350" width="150" height="148" fill="#5C1510" opacity="0.19"/>
+  </g>
+  <rect x="1302" y="350" width="150" height="148" fill="none" stroke="#D55E00" stroke-width="4"/>
+  <rect x="1365" y="362" width="75" height="33" fill="#FFFFFF" opacity="0.92"/>
+  <text class="math tiny" x="1402" y="385" text-anchor="middle" fill="#A83F00">q = 0.27</text>
+  <text class="t small" x="1377" y="531" text-anchor="middle" fill="#A83F00">除外</text>
+  <text class="t tiny" x="1292" y="572" text-anchor="middle">PCKと採用率を併記</text>
+
+  <line x1="28" y1="604" x2="1452" y2="604" stroke="#D5DADD" stroke-width="1.5"/>
+  <text class="t tiny" x="28" y="632" fill="#687078">注：入力画像，推定結果および数値は組版説明用の合成例である．</text>
+  <text class="t tiny" x="1452" y="632" text-anchor="end" fill="#687078">［架空の記入例・提出不可］</text>
+</svg>

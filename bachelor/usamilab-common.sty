@@ -1,0 +1,89 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{usamilab-common}[2026/07/29 v2.0.0 Usami Lab common definitions]
+
+\RequirePackage{etoolbox}
+\input{usamilab-profile}
+
+% 修士論文だけで用いる図目次・表目次の出力設定．
+% 設定行がない旧metadata.texでは修士をON，卒論をOFFとする．
+\newif\ifUsamiListOfFigures
+\newif\ifUsamiListOfTables
+\ifUsamiMaster
+  \UsamiListOfFigurestrue
+  \UsamiListOfTablestrue
+\else
+  \UsamiListOfFiguresfalse
+  \UsamiListOfTablesfalse
+\fi
+\newcommand{\UsamiShowListOfFigures}[1]{%
+  \ifstrequal{#1}{true}
+    {\UsamiListOfFigurestrue}
+    {\ifstrequal{#1}{false}
+       {\UsamiListOfFiguresfalse}
+       {\PackageError{usamilab-common}
+          {\string\UsamiShowListOfFigures の値 `#1' は不正です}
+          {true または false を指定してください}}}}
+\newcommand{\UsamiShowListOfTables}[1]{%
+  \ifstrequal{#1}{true}
+    {\UsamiListOfTablestrue}
+    {\ifstrequal{#1}{false}
+       {\UsamiListOfTablesfalse}
+       {\PackageError{usamilab-common}
+          {\string\UsamiShowListOfTables の値 `#1' は不正です}
+          {true または false を指定してください}}}}
+
+% metadata.tex から設定する項目
+\newcommand{\UsamiThesisYear}{20XX}
+\newcommand{\UsamiThesisTitle}{論文題目を入力}
+\newcommand{\UsamiThesisTitleEn}{English Thesis Title}
+\newcommand{\UsamiStudentName}{氏名}
+\newcommand{\UsamiStudentNameEn}{Student Name}
+\newcommand{\UsamiStudentID}{学籍番号}
+\newcommand{\UsamiSupervisor}{宇佐美 裕康}
+\newcommand{\UsamiSupervisorLabel}{指導教授}
+\newcommand{\UsamiAffiliation}{所属の正式名称}
+\newcommand{\UsamiColophonAffiliation}{}
+\newcommand{\UsamiLaboratory}{宇佐美研究室}
+\newcommand{\UsamiSubmissionDate}{20XX年2月}
+\newcommand{\UsamiAbstractKeywords}{キーワード1，キーワード2，キーワード3}
+
+\newcommand{\ThesisYear}[1]{\renewcommand{\UsamiThesisYear}{#1}}
+\newcommand{\ThesisTitle}[1]{\renewcommand{\UsamiThesisTitle}{#1}}
+\newcommand{\ThesisTitleEn}[1]{\renewcommand{\UsamiThesisTitleEn}{#1}}
+\newcommand{\StudentName}[1]{\renewcommand{\UsamiStudentName}{#1}}
+\newcommand{\StudentNameEn}[1]{\renewcommand{\UsamiStudentNameEn}{#1}}
+\newcommand{\StudentID}[1]{\renewcommand{\UsamiStudentID}{#1}}
+\newcommand{\Supervisor}[1]{\renewcommand{\UsamiSupervisor}{#1}}
+\newcommand{\SupervisorLabel}[1]{\renewcommand{\UsamiSupervisorLabel}{#1}}
+\newcommand{\Affiliation}[1]{\renewcommand{\UsamiAffiliation}{#1}}
+\newcommand{\ColophonAffiliation}[1]{\renewcommand{\UsamiColophonAffiliation}{#1}}
+\newcommand{\Laboratory}[1]{\renewcommand{\UsamiLaboratory}{#1}}
+\newcommand{\SubmissionDate}[1]{\renewcommand{\UsamiSubmissionDate}{#1}}
+\newcommand{\AbstractKeywords}[1]{\renewcommand{\UsamiAbstractKeywords}{#1}}
+
+% アブストラクト本文を両学位区分で同じ書式にするための共通命令．
+\newcommand{\AbstractSection}[1]{%
+  \par\medskip\noindent\textbf{#1}\par\nobreak\smallskip}
+\newcommand{\AbstractPageBreak}{}
+
+% 奥付だけ短い所属表記にしたい場合は\ColophonAffiliationで上書きする．
+\newcommand{\UsamiColophonAffiliationText}{%
+  \ifdefempty{\UsamiColophonAffiliation}
+    {\UsamiAffiliation}
+    {\UsamiColophonAffiliation}}
+
+% examples/にだけ用いる統一注記．提出原稿へは読み込まれない．
+\newcommand{\UsamiFictionalExampleNotice}{%
+  \fbox{\small\textbf{［架空の記入例・提出不可］}}}
+
+\newcommand{\UsamiMetadataWarnings}{%
+  \ifdefstring{\UsamiThesisTitle}{論文題目を入力}{%
+    \PackageWarningNoLine{usamilab-common}{metadata.tex の論文題目が未設定です}}{}%
+  \ifdefstring{\UsamiStudentID}{学籍番号}{%
+    \PackageWarningNoLine{usamilab-common}{metadata.tex の学籍番号が未設定です}}{}%
+  \ifdefstring{\UsamiStudentName}{氏名}{%
+    \PackageWarningNoLine{usamilab-common}{metadata.tex の氏名が未設定です}}{}%
+  \ifdefstring{\UsamiAffiliation}{所属の正式名称}{%
+    \PackageWarningNoLine{usamilab-common}{metadata.tex の所属が未設定です}}{}%
+}
+\AtBeginDocument{\UsamiMetadataWarnings}

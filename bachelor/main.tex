@@ -1,0 +1,60 @@
+% !TEX program = lualatex
+% ============================================================
+% 宇佐美研究室 卒業論文テンプレート：論文本体のドライバ
+% 通常は構成を変えず，metadata.tex，content/，chapters/，
+% ai-usage.tex，acknowledgements.tex，references.bibを編集してください．
+% ============================================================
+\documentclass{usamilab-thesis}
+
+% 論文本体とアブストラクトを別refsectionにし，双方を引用順に採番する．
+% これにより，一方へ文献を追加しても他方の番号は変わらない．
+\usepackage[backend=biber,style=ieee,sorting=none,maxbibnames=99,url=false,doi=false]{biblatex}
+\addbibresource{references.bib}
+% IEEEの慣例に合わせ，5桁以上のページ番号にも桁区切りの空きを入れない．
+\DeclareFieldFormat{pages}{\mkpageprefix[bookpagination]{#1}}
+\usepackage[embedded]{usamilab-abstract}
+\defbibheading{usamiabstract}{\AbstractSection{参考文献}}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\input{metadata}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\hypersetup{pageanchor=false}
+\MakeThesisTitle
+
+% 提出版と同様に，独立版と同じ1頁アブストラクトを表紙の直後へ収録する．
+% 目次には載せず，ページ番号も表示しない．
+\begin{refsection}
+  \MakeEmbeddedBachelorAbstract
+\end{refsection}
+
+\frontmatter
+\pagestyle{plainfoot}
+\hypersetup{pageanchor=true}
+\MakeThesisTableOfContents
+
+\mainmatter
+\pagestyle{fancy}
+\begin{refsection}
+  \input{chapters/01-introduction}
+  \input{chapters/02-background}
+  \input{chapters/03-problem}
+  \input{chapters/04-method}
+  \input{chapters/05-experiments}
+  \input{chapters/06-conclusion}
+
+  % 付録が不要な場合，appendix.texはコメントだけのままで構いません．
+  \appendix
+  \input{appendix}
+
+  \backmatter
+  \input{ai-usage}
+  \input{acknowledgements}
+  \printbibliography[heading=bibintoc,title={参考文献}]
+\end{refsection}
+
+\MakeThesisColophon
+\end{document}

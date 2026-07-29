@@ -1,0 +1,31 @@
+Usami Laboratory Thesis Template
+Copyright (c) 2026 Usami Laboratory
+
+The LaTeX template code in this distribution may be distributed and/or
+modified under the conditions of the LaTeX Project Public License,
+either version 1.3c of this license or, at your option, any later version.
+The latest version of this license is available at:
+https://www.latex-project.org/lppl/
+
+This work has the LPPL maintenance status "maintained".
+The Current Maintainer of this work is Usami Laboratory.
+
+Files under examples/ are licensed separately under Creative Commons
+Attribution 4.0 International (CC BY 4.0), except where a separate
+per-file license is stated in examples/figures/ATTRIBUTION.md.
+See examples/README.md and examples/figures/ATTRIBUTION.md.
+The documentation files README.md, WRITING_GUIDE.md, CHECKLIST.md,
+NOTICE.md, CHANGELOG.md, figures/README.md, examples/README.md, and
+examples/figures/ATTRIBUTION.md are also licensed under CC BY 4.0:
+https://creativecommons.org/licenses/by/4.0/
+
+Comments and instructions embedded in LaTeX source files outside examples/
+are part of the LPPL-licensed template code, not the CC BY documentation.
+
+The names and contents of third-party publications, datasets, software,
+and logos are not covered by this license.
+
+The file examples/figures/ct-abdomen-cc0.png, and the same image embedded
+in the CT example figures, are made available under CC0 1.0 as recorded
+in examples/figures/ATTRIBUTION.md. That per-file license prevails over
+the general CC BY 4.0 statement.

@@ -1,0 +1,34 @@
+% !TEX program = lualatex
+% ============================================================
+% 宇佐美研究室 修士論文テンプレート：独立提出用アブストラクト
+% content/abstract.texとcontent/achievements.texを編集します．
+% 2頁でない場合はコンパイルエラーになります．
+% ============================================================
+\documentclass[a4paper,10pt]{ltjsarticle}
+
+\usepackage[backend=biber,style=ieee,sorting=none,maxbibnames=99,url=false,doi=false]{biblatex}
+\addbibresource{references.bib}
+% IEEEの慣例に合わせ，5桁以上のページ番号にも桁区切りの空きを入れない．
+\DeclareFieldFormat{pages}{\mkpageprefix[bookpagination]{#1}}
+% 引用がある場合だけ，独立アブストラクト内に参考文献見出しと一覧を出す．
+% content/abstract.tex側では\printbibliographyを実行しない．
+\defbibheading{usamiabstract}{\AbstractSection{参考文献}}
+\usepackage{hyperref}
+\usepackage{usamilab-abstract}
+
+\input{metadata}
+
+\pdfstringdefDisableCommands{\def\\{ }}
+\hypersetup{
+  unicode=true,
+  hidelinks,
+  pdftitle={\UsamiThesisTitle},
+  pdfauthor={\UsamiStudentName},
+  pdfsubject={\UsamiAbstractDocumentName}
+}
+
+\begin{document}
+\begin{refsection}
+  \MakeStandaloneAbstract
+\end{refsection}
+\end{document}

@@ -1,0 +1,191 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{usamilab-abstract}[2026/07/29 v2.0.0 Usami Lab abstract]
+
+\newif\ifUsamiAbstractEmbedded
+\DeclareOption{embedded}{\UsamiAbstractEmbeddedtrue}
+\DeclareOption{standalone}{\UsamiAbstractEmbeddedfalse}
+\ExecuteOptions{standalone}
+\ProcessOptions\relax
+
+\RequirePackage[ipaex]{luatexja-preset}
+\RequirePackage{fix-cm}
+\RequirePackage{lmodern}
+\RequirePackage{geometry}
+\RequirePackage{multicol}
+\RequirePackage{amsmath,amssymb,mathtools,bm}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{capt-of}
+\RequirePackage{usamilab-common}
+
+\ifUsamiMaster
+  \newcommand{\UsamiAbstractLeftMargin}{12mm}
+  \newcommand{\UsamiAbstractRightMargin}{12mm}
+  \newcommand{\UsamiAbstractTopMargin}{8mm}
+  \newcommand{\UsamiAbstractBottomMargin}{8mm}
+  \setlength{\columnsep}{8mm}
+\else
+  \newcommand{\UsamiAbstractLeftMargin}{15mm}
+  \newcommand{\UsamiAbstractRightMargin}{15mm}
+  \newcommand{\UsamiAbstractTopMargin}{10mm}
+  \newcommand{\UsamiAbstractBottomMargin}{10mm}
+  \setlength{\columnsep}{5.5mm}
+\fi
+
+\ifUsamiAbstractEmbedded\else
+  \geometry{
+    top=\UsamiAbstractTopMargin,
+    bottom=\UsamiAbstractBottomMargin,
+    left=\UsamiAbstractLeftMargin,
+    right=\UsamiAbstractRightMargin,
+    headheight=0pt,
+    headsep=0pt,
+    footskip=0pt
+  }
+  \pagestyle{empty}
+\fi
+
+\setlength{\columnseprule}{0pt}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt}
+\setlength{\multicolsep}{2pt plus 1pt minus 1pt}
+\setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}
+\setlength{\belowdisplayskip}{4pt plus 1pt minus 1pt}
+
+% 論文本体と独立版で，図表番号とコロンを同じ位置へ組む．
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\small #1: #2}%
+  \ifdim \wd\@tempboxa>\hsize
+    {\small #1: #2\par}%
+  \else
+    \global\@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip
+}
+
+% 論文本体は12pt，独立版は10ptクラスであるため，アブスト内だけ
+% 10ptクラス相当のサイズ命令へ固定し，両PDFの改行とページ数を一致させる．
+\newcommand{\UsamiAbstractFontSetup}{%
+  \renewcommand{\baselinestretch}{1}%
+  \renewcommand{\normalsize}{\@setfontsize\normalsize{10pt}{12pt}}%
+  \renewcommand{\small}{\@setfontsize\small{9pt}{11pt}}%
+  \renewcommand{\footnotesize}{\@setfontsize\footnotesize{8pt}{9.5pt}}%
+  \renewcommand{\large}{\@setfontsize\large{12pt}{14pt}}%
+  \renewcommand{\Large}{\@setfontsize\Large{14.4pt}{18pt}}%
+  \normalsize
+}
+
+\newsavebox{\UsamiAbstractSectionBox}
+\newcommand{\UsamiUnderlinedAbstractSection}[1]{%
+  \sbox{\UsamiAbstractSectionBox}{\textbf{#1}}%
+  \rlap{\raisebox{-0.4ex}{\rule{\wd\UsamiAbstractSectionBox}{0.4pt}}}%
+  \usebox{\UsamiAbstractSectionBox}}
+
+\renewcommand{\AbstractSection}[1]{%
+  \par\vspace{0.55\baselineskip}%
+  \noindent\UsamiUnderlinedAbstractSection{#1}%
+  \par\nobreak\vspace{0.08\baselineskip}}
+
+\newcommand{\UsamiAbstractHeader}{%
+  \begin{center}
+    {\large\bfseries \UsamiThesisTitle\par}
+    \vspace{2.5mm}
+    \makebox[\linewidth]{%
+      \makebox[0.30\linewidth][l]{}%
+      \makebox[0.40\linewidth][c]{\UsamiStudentID\quad \UsamiStudentName}%
+      \makebox[0.30\linewidth][r]{\UsamiSupervisorLabel：\UsamiSupervisor}%
+    }
+  \end{center}
+  \vspace{4mm}
+}
+
+\renewcommand{\AbstractPageBreak}{%
+  \end{multicols}%
+  \newpage
+  \begin{multicols}{2}%
+}
+
+\newcommand{\UsamiAbstractMaterial}{%
+  \input{content/abstract}
+  \printbibliography[heading=usamiabstract]
+  \AbstractSection{研究業績}
+  \input{content/achievements}
+}
+
+\newcommand{\MakeStandaloneAbstract}{%
+  \thispagestyle{empty}
+  \UsamiAbstractFontSetup
+  \UsamiAbstractHeader
+  \small
+  \begin{multicols}{2}
+    \UsamiAbstractMaterial
+  \end{multicols}
+}
+
+\newcounter{UsamiEmbeddedAbstractPageCount}
+\newif\ifUsamiCountEmbeddedAbstractPages
+\AddToHook{shipout/after}{%
+  \ifUsamiCountEmbeddedAbstractPages
+    \stepcounter{UsamiEmbeddedAbstractPageCount}%
+  \fi
+}
+
+\newcommand{\MakeEmbeddedBachelorAbstract}{%
+  \ifUsamiMaster
+    \PackageError{usamilab-abstract}{修士論文本体にはアブストラクトを組み込みません}{%
+      修士アブストラクトはabstract.texから独立した2頁PDFとして作成してください．}%
+  \else
+    \clearpage
+    \newgeometry{
+      top=\UsamiAbstractTopMargin,
+      bottom=\UsamiAbstractBottomMargin,
+      left=\UsamiAbstractLeftMargin,
+      right=\UsamiAbstractRightMargin,
+      headheight=16pt,
+      headsep=0pt,
+      footskip=17pt
+    }
+    \setcounter{UsamiEmbeddedAbstractPageCount}{0}%
+    \global\UsamiCountEmbeddedAbstractPagestrue
+    \thispagestyle{empty}
+    \begingroup
+      \UsamiAbstractFontSetup
+      \UsamiAbstractHeader
+      \small
+      \begin{multicols}{2}
+        \UsamiAbstractMaterial
+      \end{multicols}
+    \endgroup
+    \clearpage
+    \global\UsamiCountEmbeddedAbstractPagesfalse
+    \restoregeometry
+    \ifnum\value{UsamiEmbeddedAbstractPageCount}=1\relax
+    \else
+      \PackageError{usamilab-abstract}{%
+        論文本体へ組み込む卒業論文アブストラクトが
+        \arabic{UsamiEmbeddedAbstractPageCount}頁です}{%
+        content/abstract.texを調整し，1頁に収めてください．}%
+    \fi
+  \fi
+}
+
+% 物理ページ数を同一ビルド内で検査する．Overleafではエラー後にもPDFが
+% 生成され得るため，提出前にはCHECKLIST.mdのpdfinfo確認も行う．
+\ifUsamiAbstractEmbedded\else
+  \newcounter{UsamiAbstractPageCount}
+  \AddToHook{shipout/after}{\stepcounter{UsamiAbstractPageCount}}
+  \AtEndDocument{%
+    \clearpage
+    \typeout{USAMILAB-ABSTRACT-PAGES: \arabic{UsamiAbstractPageCount}/\UsamiExpectedAbstractPages}%
+    \ifnum\value{UsamiAbstractPageCount}=\UsamiExpectedAbstractPages\relax
+    \else
+      \PackageError{usamilab-abstract}{%
+        アブストラクトのページ数が指定と一致しません（現在 \arabic{UsamiAbstractPageCount} 頁，指定 \UsamiExpectedAbstractPages 頁）}{%
+        content/abstract.texを調整し，\UsamiExpectedAbstractPages 頁に収めてください．}%
+    \fi
+  }
+\fi

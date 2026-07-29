@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{usamilab-thesis}[2026/07/29 v2.0.0 Usami Lab thesis]
+\ProvidesClass{usamilab-thesis}[2026/07/29 v2.0.1 Usami Lab thesis]
 
 % 旧テンプレートのコードは転記せず，提出済みPDFの版面を
 % TeX Live標準のLuaLaTeX用クラス上で再実装する．

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360">
+  <title>アブストラクト用の解剖構造保持拡散図</title>
+  <desc>CC0の腹部CT実画像，条件付き潜在拡散，解剖整合性判定および分割評価を一段で示す横長図</desc>
+  <defs>
+    <clipPath id="ctClip"><rect x="18" y="48" width="330" height="222" rx="3"/></clipPath>
+    <clipPath id="z1"><rect x="446" y="79" width="118" height="104" rx="3"/></clipPath>
+    <clipPath id="z2"><rect x="600" y="79" width="118" height="104" rx="3"/></clipPath>
+    <clipPath id="qa"><rect x="844" y="66" width="190" height="145" rx="3"/></clipPath>
+    <filter id="blur"><feGaussianBlur stdDeviation="2.0"/></filter>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M0,0 L11,5.5 L0,11 z" fill="#4A535B"/>
+    </marker>
+    <style>
+      .t{font-family:'Hiragino Sans','Yu Gothic','Noto Sans CJK JP',sans-serif;fill:#20252A}
+      .head{font-size:25px;font-weight:700}
+      .body{font-size:20px}
+      .small{font-size:17px}
+      .tiny{font-size:14px}
+      .math{font-family:'STIX Two Math','STIXGeneral','Times New Roman',serif;font-style:italic}
+    </style>
+  </defs>
+  <rect width="1200" height="360" fill="#FFFFFF"/>
+
+  <text class="t head" x="18" y="30">（a）実CT・条件ラベル</text>
+  <g clip-path="url(#ctClip)">
+    <image href="ct-abdomen-cc0.png" x="18" y="48" width="510" height="222" preserveAspectRatio="xMinYMid meet"/>
+    <path d="M65 105 C89 73,167 65,235 82 C269 91,284 132,267 175 C238 204,164 216,96 195 C58 181,48 137,65 105Z"
+          fill="#E69F00" fill-opacity="0.20" stroke="#E69F00" stroke-width="6"/>
+    <path d="M237 133 C245 105,271 94,292 108 C307 124,302 160,282 178 C256 184,235 163,237 133Z"
+          fill="#009E73" fill-opacity="0.23" stroke="#009E73" stroke-width="6"/>
+  </g>
+  <rect x="18" y="48" width="330" height="222" fill="none" stroke="#707A82" stroke-width="2"/>
+  <rect x="40" y="286" width="16" height="16" fill="#E69F00"/><text class="t small" x="64" y="301">肝</text>
+  <rect x="112" y="286" width="16" height="16" fill="#009E73"/><text class="t small" x="136" y="301">右腎</text>
+  <text class="t tiny" x="348" y="301" text-anchor="end">患者単位で分割</text>
+
+  <line x1="366" y1="159" x2="410" y2="159" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="t head" x="420" y="30">（b）条件付き潜在拡散</text>
+  <g clip-path="url(#z1)" filter="url(#blur)">
+    <image href="ct-abdomen-cc0.png" x="420" y="79" width="190" height="104" preserveAspectRatio="xMinYMid slice"/>
+    <rect x="446" y="79" width="118" height="104" fill="#26343D" opacity="0.42"/>
+  </g>
+  <g fill="#FFFFFF" opacity="0.70">
+    <circle cx="463" cy="97" r="4"/><circle cx="492" cy="124" r="5"/><circle cx="528" cy="105" r="3"/>
+    <circle cx="545" cy="163" r="5"/><circle cx="475" cy="166" r="4"/>
+  </g>
+  <rect x="446" y="79" width="118" height="104" fill="none" stroke="#7B858C" stroke-width="2"/>
+  <text class="math small" x="505" y="211" text-anchor="middle">z<tspan baseline-shift="sub" font-size="12">T</tspan></text>
+  <line x1="570" y1="131" x2="594" y2="131" stroke="#4A535B" stroke-width="2" marker-end="url(#arrow)"/>
+  <g clip-path="url(#z2)">
+    <image href="ct-abdomen-cc0.png" x="574" y="79" width="190" height="104" preserveAspectRatio="xMinYMid slice"/>
+  </g>
+  <rect x="600" y="79" width="118" height="104" fill="none" stroke="#7B858C" stroke-width="2"/>
+  <text class="math small" x="659" y="211" text-anchor="middle">z<tspan baseline-shift="sub" font-size="12">0</tspan></text>
+  <rect x="445" y="236" width="274" height="55" fill="#F3F7F9" stroke="#B9C2C8" stroke-width="2"/>
+  <text class="t body" x="582" y="260" text-anchor="middle">VAE ＋ 条件付きU-Net</text>
+  <text class="t tiny" x="582" y="282" text-anchor="middle">画像 <tspan class="math">x</tspan> とラベル <tspan class="math">y</tspan> の対応を保持</text>
+
+  <line x1="736" y1="159" x2="780" y2="159" stroke="#4A535B" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="t head" x="790" y="30">（c）解剖QA・評価</text>
+  <g clip-path="url(#qa)">
+    <image href="ct-abdomen-cc0.png" x="805" y="66" width="300" height="145" preserveAspectRatio="xMinYMid slice"/>
+    <path d="M873 111 C904 82,979 86,1010 111 C1027 132,1013 174,980 190 C929 203,873 184,856 153 C849 137,856 121,873 111Z"
+          fill="#E69F00" fill-opacity="0.18" stroke="#E69F00" stroke-width="6"/>
+    <path d="M963 132 C974 109,1001 105,1016 121 C1025 139,1014 165,995 174 C976 172,958 154,963 132Z"
+          fill="#009E73" fill-opacity="0.22" stroke="#009E73" stroke-width="6"/>
+  </g>
+  <rect x="844" y="66" width="190" height="145" fill="none" stroke="#009E73" stroke-width="6"/>
+  <rect x="862" y="80" width="111" height="34" fill="#FFFFFF" opacity="0.90"/>
+  <text class="math small" x="918" y="104" text-anchor="middle">s<tspan baseline-shift="sub" font-size="12">a</tspan> = 0.91</text>
+  <text class="t body" x="939" y="239" text-anchor="middle" fill="#007A59">採択</text>
+  <line x1="1062" y1="82" x2="1062" y2="286" stroke="#D2D7DA" stroke-width="2"/>
+  <text class="t tiny" x="1082" y="105">Dice</text>
+  <line x1="1084" y1="140" x2="1168" y2="140" stroke="#0072B2" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="1141" cy="140" r="12" fill="#0072B2"/>
+  <text class="t tiny" x="1082" y="180">HD95</text>
+  <line x1="1084" y1="215" x2="1168" y2="215" stroke="#D55E00" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="1113" cy="215" r="12" fill="#D55E00"/>
+  <text class="t tiny" x="1126" y="274" text-anchor="middle">患者単位評価</text>
+
+  <line x1="18" y1="322" x2="1182" y2="322" stroke="#D2D7DA" stroke-width="2"/>
+  <text class="t tiny" x="18" y="344">CT：Mikael Häggström, M.D.／Wikimedia Commons，CC0 1.0．ラベル・数値は架空例．</text>
+  <text class="t tiny" x="1182" y="344" text-anchor="end">［架空の記入例・提出不可］</text>
+</svg>

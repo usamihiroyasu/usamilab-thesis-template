@@ -1,12 +1,12 @@
 # ライセンス範囲
 
-Version 2.0.0，2026-07-29
+Version 2.0.1，2026-07-29
 
-この文書は，宇佐美研究室 卒業論文・修士論文テンプレートVersion 2.0.0の配布対象と，ライセンスの適用範囲を整理するものです．公開状態は`PUBLISHED_WITH_KNOWN_OVERLEAF_FREE_PLAN_LIMIT`です．
+この文書は，宇佐美研究室 卒業論文・修士論文テンプレートVersion 2.0.1の配布対象と，ライセンスの適用範囲を整理するものです．公開前の検証状態は`READY_FOR_PUBLICATION`です．
 
 ## 1．LaTeXソース
 
-Version 2.0.0の最終配布ZIPへ収録する，宇佐美研究室テンプレートとして新規に作成または再実装したLaTeXソースには，LaTeX Project Public License 1.3c以降を適用します．ただし，`examples/`以下の記入例は第2節および第3節のライセンスを適用します．LPPLの対象には，次を含みます．
+Version 2.0.1の最終配布ZIPへ収録する，宇佐美研究室テンプレートとして新規に作成または再実装したLaTeXソースには，LaTeX Project Public License 1.3c以降を適用します．ただし，`examples/`以下の記入例は第2節および第3節のライセンスを適用します．LPPLの対象には，次を含みます．
 
 - `examples/`以下を除く`.tex`ファイル
 - `.cls`ファイル
@@ -19,21 +19,21 @@ Version 2.0.0の最終配布ZIPへ収録する，宇佐美研究室テンプレ�
 
 ## 2．記入例とプレビュー
 
-Version 2.0.0用に新規作成した次の内容には，Creative Commons Attribution 4.0 Internationalを適用します．ただし，`examples/figures/ATTRIBUTION.md`に別のライセンスを明記した画像または埋込み素材には，その個別条件を優先します．
+Version 2.0.1用に新規作成した次の内容には，Creative Commons Attribution 4.0 Internationalを適用します．ただし，`examples/figures/ATTRIBUTION.md`に別のライセンスを明記した画像または埋込み素材には，その個別条件を優先します．
 
 - `examples/`以下の記入例，架空の研究業績および説明文
 - 各配布ZIPの`README.md`，`WRITING_GUIDE.md`，`CHECKLIST.md`，`NOTICE.md`，`CHANGELOG.md`および`figures/README.md`
 - 本リリースのルートにある`README.md`，`PUBLICATION_CHECKLIST.md`，`VALIDATION_REPORT.md`および`LICENSE.md`
-- Version 2.0.0の記入例から最終生成するプレビューPDF
+- Version 2.0.1の記入例から最終生成するプレビューPDF
 
 通常の`.tex`，`.cls`および`.sty`内にある説明コメントは本節の「説明文」には含めず，第1節のLPPLを適用します．
 
-プレビューPDFは，Version 2.0.0の最終ソースから再生成し，`VALIDATION_REPORT.md`へSHA-256を記録したものだけを公開対象とします．
+プレビューPDFは，Version 2.0.1の最終ソースから再生成し，`VALIDATION_REPORT.md`へSHA-256を記録したものだけを公開対象とします．
 
 表示例：
 
 ```text
-Usami Laboratory Bachelor’s and Master’s Thesis Templates v2.0.0
+Usami Laboratory Bachelor’s and Master’s Thesis Templates v2.0.1
 © 2026 Usami Laboratory
 Example content licensed under CC BY 4.0
 LaTeX source licensed under LPPL 1.3c or later
@@ -49,7 +49,7 @@ LaTeX source licensed under LPPL 1.3c or later
 
 ## 4．ライセンス対象外
 
-次の資料は，Version 2.0.0のライセンス対象外です．また，最終配布物へ収録しません．
+次の資料は，Version 2.0.1のライセンス対象外です．また，最終配布物へ収録しません．
 
 - 正本として参照した提出版PDF群
 - 対応する過去のLaTeX履歴
@@ -88,4 +88,4 @@ NeurIPS，CVPR，MICCAI，MIRU，情報処理学会等の名称は，各権利�
 - 本ファイルに記載した対象外資料の不収録
 - 大学または研究室の公式承認を示すとの誤認を避ける表示
 
-Version 2.0.0の最終配布物の内容と本ライセンス範囲が一致していることは，公開前の検証記録で確認済みです．
+Version 2.0.1の最終配布物の内容と本ライセンス範囲が一致していることは，公開前の検証記録で確認済みです．外部公開の完了記録は，公開後に既定ブランチの検証報告へ追記します．

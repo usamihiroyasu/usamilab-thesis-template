@@ -1,8 +1,8 @@
 # 宇佐美研究室 卒業論文・修士論文テンプレート
 
-Version 2.0.0
+Version 2.0.1
 
-公開状態：`PUBLISHED_WITH_KNOWN_OVERLEAF_FREE_PLAN_LIMIT`
+公開状態：`READY_FOR_PUBLICATION`
 
 宇佐美研究室で，卒業論文，修士論文，およびそれぞれの提出用アブストラクトを作成するためのLuaLaTeXテンプレートです．卒業論文アブストラクトは1ページ，修士論文アブストラクトは2ページに固定しています．ポスター，スライド，学会原稿等は対象としていません．
 
@@ -12,13 +12,22 @@ Version 2.0.0
 
 | 区分 | Overleaf | Source ZIP | 記入例PDF |
 |---|---|---|---|
-| 卒業論文・1ページアブスト | [read-onlyプロジェクトをコピー](https://ja.overleaf.com/read/wjfdwtkmmssf#e2b65e) | [Version 2.0.0 ZIP](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/download/v2.0.0/usamilab-bachelor-thesis-template-v2.0.0.zip) | [論文本体](previews/bachelor-thesis-filled-example.pdf)／[アブスト](previews/bachelor-abstract-1page-filled-example.pdf) |
-| 修士論文・2ページアブスト | [read-onlyプロジェクトをコピー](https://ja.overleaf.com/read/qcsynfyrmycw#26cab2) | [Version 2.0.0 ZIP](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/download/v2.0.0/usamilab-master-thesis-template-v2.0.0.zip) | [論文本体](previews/master-thesis-filled-example.pdf)／[アブスト](previews/master-abstract-2page-filled-example.pdf) |
+| 卒業論文・1ページアブスト | [read-onlyプロジェクトをコピー](https://ja.overleaf.com/read/wjfdwtkmmssf#e2b65e) | [Version 2.0.1 ZIP](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/download/v2.0.1/usamilab-bachelor-thesis-template-v2.0.1.zip) | [論文本体](previews/bachelor-thesis-filled-example.pdf)／[アブスト](previews/bachelor-abstract-1page-filled-example.pdf) |
+| 修士論文・2ページアブスト | [read-onlyプロジェクトをコピー](https://ja.overleaf.com/read/qcsynfyrmycw#26cab2) | [Version 2.0.1 ZIP](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/download/v2.0.1/usamilab-master-thesis-template-v2.0.1.zip) | [論文本体](previews/master-thesis-filled-example.pdf)／[アブスト](previews/master-abstract-2page-filled-example.pdf) |
 
-- [GitHub Release v2.0.0](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/tag/v2.0.0)
+- [GitHub Release v2.0.1](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/tag/v2.0.1)
 - [宇佐美研究室 資料](https://usamilab.org/resources/)
 
 卒業論文用と修士論文用は独立しています．一つのプロジェクト内で学位区分を切り替える方式ではありません．
+
+## 学生向け：最初に読む
+
+このルートREADMEは，配布物の選択と入手方法を案内します．実際の操作は学位別README，内容の組み立ては執筆ガイド，提出判定はチェックリストを正本とします．
+
+| 作成物 | 操作手順 | 論文の書き方 | 内容入り例 | 提出前確認 |
+|---|---|---|---|---|
+| 卒業論文・1ページアブスト | [学部README](bachelor/README.md) | [学部執筆ガイド](bachelor/WRITING_GUIDE.md) | [学部記入例](bachelor/examples/README.md) | [学部チェックリスト](bachelor/CHECKLIST.md) |
+| 修士論文・2ページアブスト | [修士README](master/README.md) | [修士執筆ガイド](master/WRITING_GUIDE.md) | [修士記入例](master/examples/README.md) | [修士チェックリスト](master/CHECKLIST.md) |
 
 ## Overleafで使う
 
@@ -58,7 +67,7 @@ latexmk abstract.tex
 
 ## 検証
 
-Version 2.0.0は，TeX Live 2025で論文本体と独立アブストのクリーンビルド，ページ数，引用分離，任意のAI利用申告，ZIP再展開およびPDF描画を検証しています．卒業論文アブストは1ページ，修士論文アブストは2ページです．詳細は[検証報告](docs/VALIDATION_REPORT.md)を参照してください．
+Version 2.0.1は，TeX Live 2025で論文本体と独立アブストのクリーンビルド，ページ数，引用分離，任意のAI利用申告，ZIP再展開およびPDF描画を検証しています．卒業論文アブストは1ページ，修士論文アブストは2ページです．詳細は[検証報告](docs/VALIDATION_REPORT.md)を参照してください．
 
 Overleafでは，卒業論文用と修士論文用を独立したプロジェクトとしてアップロードし，LuaLaTeX，TeX Live 2025へ設定して閲覧リンクを公開しました．無料プランでは4文書とも上記の時間上限へ達したため，Overleaf上の生成PDFではなく，同一ソースのローカル検証結果を正式なビルド証跡としています．
 

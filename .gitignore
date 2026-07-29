@@ -1,0 +1,44 @@
+# macOS and archive metadata
+.DS_Store
+__MACOSX/
+
+# Editors
+*~
+*.bak
+*.swp
+.idea/
+.vscode/
+
+# LaTeX generated files
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.ist
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+_minted-*/
+latex.out/
+main.pdf
+abstract.pdf
+
+# Release assets are attached to GitHub Releases
+*.zip

@@ -2,7 +2,7 @@
 
 検証日：2026-07-29
 
-公開前判定：`READY_FOR_PUBLICATION`
+公開判定：`PUBLISHED`
 
 ## 対象
 
@@ -61,7 +61,7 @@ Source ZIPはGitHub Releaseの添付資産であり，リポジトリ本体に�
 
 ## Overleaf実機確認
 
-Version 2.0.0で公開済みの卒業論文用と修士論文用の独立したOverleafプロジェクトを，Version 2.0.1の同一ソースへ更新する．CompilerはLuaLaTeX，TeX Liveは2025とし，閲覧・複製用リンクは維持する．
+Version 2.0.0で公開済みの卒業論文用と修士論文用の独立したOverleafプロジェクトを，Version 2.0.1の同一ソースへ更新した．閲覧・複製用リンクと共有設定は維持した．
 
 - 卒業論文：`https://ja.overleaf.com/read/wjfdwtkmmssf#e2b65e`
 - 修士論文：`https://ja.overleaf.com/read/qcsynfyrmycw#26cab2`
@@ -70,4 +70,18 @@ Version 2.0.0の実機試験では，4文書ともLuaTeX-jaの初回フォント
 
 本テンプレートは大学公式様式ではない研究室資料である．氏名，研究内容，数値，研究業績，謝辞およびAI利用状況の記入例は架空であり，参考文献例は実在文献である．
 
-Version 2.0.1のGitHub Release，Overleaf共有プロジェクトおよび研究室Webサイトへの同期は，本報告の公開前判定後に実施する．外部URL，配布物のSHA-256および匿名取得結果は，公開後に既定ブランチの本報告へ追記する．利用者は2026-07-29にVersion 2.0.1の公開を明示的に許可した．
+## 外部公開確認
+
+公開完了：2026-07-29 20:56 JST
+
+利用者による2026-07-29の明示的な公開許可に基づき，次を実施した．
+
+- GitHubの既定ブランチへVersion 2.0.1の全ソースとプレビューPDFを反映した．未認証で新規cloneし，公開時点の最終ソースとの差分が0件であることを確認した．
+- GitHub Release [`v2.0.1`](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/tag/v2.0.1)を公開した．タグは公開時点の既定ブランチ`c63d104983add3bdfbbebbfd5489e7ff56540e08`を指し，Source ZIP 2点，プレビューPDF 4点，`SHA256SUMS`の計7資産が`uploaded`状態である．
+- Releaseの6成果物を未認証で再取得し，公開された`SHA256SUMS`による照合が全件合格した．
+- Overleafの既存read-only URLから未認証でSource ZIPを再取得した．卒業論文用49ファイルと修士論文用46ファイルは，それぞれ公開対象ソースとの差分が0件だった．プロジェクト名はVersion 2.0.1へ更新した．
+- [研究室Webサイトの資料ページ](https://usamilab.org/resources/)と[英語版](https://usamilab.org/en/resources/)をVersion 2.0.1へ更新した．両ページ，配布物7点，`healthz-lb`，mini春日井3Dデモおよび防災デモはHTTP 200を返した．
+- 研究室Webサイトから6成果物を再取得し，公開チェックサムとの一致を確認した．無版名のZIP，論文本体プレビューおよびアブストプレビューは，卒業論文用Version 2.0.1と一致した．
+- 本番HTMLへのGA4ローダーの埋込みと，資料リンクの計測用識別子を維持していることを確認した．GA4管理画面でのイベント受信は本検証の対象外である．
+
+以上により，Version 2.0.1の公開判定を`PUBLISHED`とする．

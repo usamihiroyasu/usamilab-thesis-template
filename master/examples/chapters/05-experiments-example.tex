@@ -1,0 +1,40 @@
+% ［架空の記入例・提出不可］通常ビルドには読み込まれません．
+% 必要な構造だけをchapters/05-experiments.texへ移し，架空内容を置換してください．
+\chapter{実験・評価}
+
+\begin{center}
+  \UsamiFictionalExampleNotice
+\end{center}
+
+\section{データと評価手順}
+造影腹部CT 84症例を用いた架空設定とし，患者単位で学習50例，検証14例，評価20例へ固定した．同一患者由来のスライスを複数集合へ混入させず，合成モデルと分割モデルの双方を学習集合だけで最適化した．評価指標には臓器平均Dice係数と95パーセンタイルHausdorff距離（HD95）を用いた．
+
+実際の研究では，倫理審査の承認情報，匿名化手順，症例の選択・除外基準，撮像装置および造影相を明記する．本例の症例数と分割は，組版説明用の架空設定である．
+
+\section{比較条件}
+実画像のみ，幾何拡張，条件付き拡散拡張，提案法の4条件を比較した．条件付き拡散はHoら\cite{ho2020ddpm}と潜在拡散\cite{rombach2022ldm}を参照した架空実装であり，提案法だけが図\ref{fig:method-overview}の解剖整合性判定と式\eqref{eq:segmentation-objective}の整合性項を用いる．
+
+\section{結果}
+主要結果を表\ref{tab:segmentation-results}に示す．提案法は，実画像のみと比較してDiceを改善し，HD95を低減した．
+
+\begin{table}[tb]
+  \centering
+  % 表題は表本体より上へ置く．
+  \caption{腹部CT多臓器分割の架空結果．}
+  \label{tab:segmentation-results}
+  \begin{tabularx}{0.92\textwidth}{@{}Xcc@{}}
+    \toprule
+    条件 & Dice$\uparrow$ & HD95 [mm]$\downarrow$ \\
+    \midrule
+    実画像のみ & $0.781\pm0.012$ & $12.8\pm1.4$ \\
+    幾何拡張 & $0.799\pm0.010$ & $11.6\pm1.2$ \\
+    条件付き拡散拡張 & $0.812\pm0.009$ & $10.9\pm1.0$ \\
+    提案法 & $\mathbf{0.826\pm0.008}$ & $\mathbf{9.7\pm0.9}$ \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+表\ref{tab:segmentation-results}では，提案法が実画像のみと比べて平均Diceを架空の0.045改善し，HD95を\SI{3.1}{mm}低減した．一方，細い血管領域では条件間の差が小さかった．式\eqref{eq:segmentation-objective}から解剖整合性項を除くと平均Diceが架空の0.011低下し，左右腎の接触を含む不自然な合成対が増えた．
+
+\section{失敗例と考察}
+改善が得られなかった症例では，造影相の差，部分容積効果，アノテーション揺らぎが重なっていた．観測された性能差だけから拡散拡張の臨床的有効性を結論づけることはできない．外部施設データでの再評価，放射線画像に通じた評価者による盲検確認，患者単位の信頼区間を追加し，生成画像の多様性と個人情報漏洩リスクも別に監査する必要がある．

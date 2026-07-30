@@ -80,8 +80,7 @@ Version 2.0.0の実機試験では，4文書ともLuaTeX-jaの初回フォント
 - GitHub Release [`v2.0.1`](https://github.com/usamihiroyasu/usamilab-thesis-template/releases/tag/v2.0.1)を公開した．タグは公開時点の既定ブランチ`c63d104983add3bdfbbebbfd5489e7ff56540e08`を指し，Source ZIP 2点，プレビューPDF 4点，`SHA256SUMS`の計7資産が`uploaded`状態である．
 - Releaseの6成果物を未認証で再取得し，公開された`SHA256SUMS`による照合が全件合格した．
 - Overleafの既存read-only URLから未認証でSource ZIPを再取得した．卒業論文用49ファイルと修士論文用46ファイルは，それぞれ公開対象ソースとの差分が0件だった．プロジェクト名はVersion 2.0.1へ更新した．
-- [研究室Webサイトの資料ページ](https://usamilab.org/resources/)と[英語版](https://usamilab.org/en/resources/)をVersion 2.0.1へ更新した．両ページ，配布物7点，`healthz-lb`，mini春日井3Dデモおよび防災デモはHTTP 200を返した．
-- 研究室Webサイトから6成果物を再取得し，公開チェックサムとの一致を確認した．無版名のZIP，論文本体プレビューおよびアブストプレビューは，卒業論文用Version 2.0.1と一致した．
-- 本番HTMLへのGA4ローダーの埋込みと，資料リンクの計測用識別子を維持していることを確認した．GA4管理画面でのイベント受信は本検証の対象外である．
+- [研究室Webサイトの資料ページ](https://usamilab.org/resources/)と[英語版](https://usamilab.org/en/resources/)をVersion 2.0.1へ更新した．
+- 研究室Webサイトから成果物を再取得し，公開チェックサムとの一致を確認した．無版名のZIP，論文本体プレビューおよびアブストプレビューは，卒業論文用Version 2.0.1と一致した．
 
 以上により，Version 2.0.1の公開判定を`PUBLISHED`とする．
